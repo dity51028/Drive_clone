@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body,validationResult } = require('express-validator');
+const userModel = require('../models/user.model');
 
 router.get('/test',(req,res)=>{
     res.send('user router created');
@@ -27,9 +28,19 @@ router.post('/register',
         })
     }
 
+    const {email,username,password} = req.body;
+
+    const newUser = userModel.create({
+        email,
+        username,
+        password
+    })
+
+    res.json(newUser);
+
     console.log(errors);
     console.log(req.body);
-    res.send(errors)
+   // res.send(errors);
 })
 
 module.exports = router;

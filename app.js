@@ -1,6 +1,15 @@
 const express = require('express');
+
+const userRouter = require('./routes/userRoutes');
+const dotENV = require('dotenv');
+
+
+dotENV.config();
+const connectToDB = require('./config/db');
+connectToDB();
+
+
 const app = express();
-const userRouter = require('./routes/userRoutes')
 
 app.set('view engine','ejs')
 
